@@ -1,0 +1,70 @@
+---
+title: 'Molecular Mechanisms for Human Diseases: Lab 1'
+subtitle: "Curing Hepatitis"
+author: "Peter Yibo Pan"
+date: (`r Sys.Date()`)
+output:
+  word_document:
+    reference_docx: reference-word.docx
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(glue)
+library(knitr)
+library(showtext)
+theme_set(theme_minimal())
+font_add_google("Tinos", family = "tinos")
+showtext_auto()
+```
+
+## Step I
+
+```{r  step_I}
+
+# Q1
+  # import data 
+step_i_df <- tribble(
+  ~'x',  ~'y',
+  17, 1963, 
+  21, 1997, 
+  25, 2046, 
+  29, 2051, 
+  33, 2059, 
+  37, 2071,
+  41, 2094,) %>%
+  data.frame() %>% 
+  # data manipulation
+  mutate(x_inv = 1/(y + 273))
+  
+  
+
+  # visualization
+step_i_df %>% 
+  ggplot(aes(x = x_inv, y = y)) + 
+  geom_point()
+# Q2
+  # fit a straight line
+  # define linear fit
+step_i_fit <- lm(step_i_df$y ~ step_i_df$x_inv)
+  # record coefficients
+step_i_coef <- step_i_fit %>%
+  coef() %>%
+  formatC(format = "e", digits = 2)
+  # show coefficients
+tibble(intercept = step_i_coef[1], 
+       slope = step_i_coef[2]) %>%
+  kable()
+  
+# Q3 
+  # calculations
+
+# Q4
+  # Demonstrative visualizations
+
+```
+
+## Step II
+
+## Step III
+
