@@ -49,12 +49,18 @@ step_i_df %>%
 step_i_fit <- lm(step_i_df$y ~ step_i_df$x_inv)
   # record coefficients
 step_i_coef <- step_i_fit %>%
-  coef() %>%
-  formatC(format = "e", digits = 2)
+  coef()
+  
   # show coefficients
 tibble(intercept = step_i_coef[1], 
        slope = step_i_coef[2]) %>%
   kable()
+  # visualize
+step_i_df %>% 
+  ggplot(aes(x = x_inv, y = y)) + 
+  geom_point() + 
+  geom_abline(intercept = step_i_coef[1], 
+       slope = step_i_coef[2])
   
 # Q3 
   # calculations
@@ -63,6 +69,12 @@ tibble(intercept = step_i_coef[1],
   # Demonstrative visualizations
 
 ```
+$$ \Delta G = \Delta H- T \Delta S = -RTlnK$$
+$$lnK = -\frac{\Delta H}{R}\frac{1}{T} + \frac{\Delta S}{R}$$
+Hence slope = $-\frac{\Delta H}{R}$ and intercept = $\frac{\Delta S}{R}$
+R defined as $ 8.3144598 \frac{J}{mol K}$
+
+
 
 ## Step II
 
