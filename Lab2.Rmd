@@ -64,7 +64,8 @@ step_i_df %>%
   
 # Q3 
   # calculations
-
+R <- 8.3144598
+delta_h <- -R * step_i_coef[2]
 # Q4
   # Demonstrative visualizations
 
@@ -73,7 +74,7 @@ $$ \Delta G = \Delta H- T \Delta S = -RTlnK$$
 $$lnK = -\frac{\Delta H}{R}\frac{1}{T} + \frac{\Delta S}{R}$$
 Hence slope = $-\frac{\Delta H}{R}$ and intercept = $\frac{\Delta S}{R}$
 R defined as $ 8.3144598 \frac{J}{mol K}$
-
+$$ \Delta H = - R * slope; \Delta S = R * intercept$$
 
 
 ## Step II
