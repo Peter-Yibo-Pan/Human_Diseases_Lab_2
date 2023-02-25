@@ -7,6 +7,7 @@ output:
   word_document:
     reference_docx: reference-word.docx
 ---
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
@@ -35,7 +36,7 @@ step_i_df <- tribble(
   41, 2094,) %>%
   data.frame() %>% 
   # data manipulation
-  mutate(x_inv = 1/(y + 273))
+  mutate(x_inv = 1/(x + 273))
   
   
 
@@ -66,18 +67,14 @@ step_i_df %>%
   # calculations
 R <- 8.3144598
 delta_h <- -R * step_i_coef[2]
+delta_s <- R * step_i_coef[1]
 # Q4
   # Demonstrative visualizations
 
 ```
-$$ \Delta G = \Delta H- T \Delta S = -RTlnK$$
-$$lnK = -\frac{\Delta H}{R}\frac{1}{T} + \frac{\Delta S}{R}$$
-Hence slope = $-\frac{\Delta H}{R}$ and intercept = $\frac{\Delta S}{R}$
-R defined as $ 8.3144598 \frac{J}{mol K}$
-$$ \Delta H = - R * slope; \Delta S = R * intercept$$
 
+$$ \Delta G = \Delta H- T \Delta S = -RTlnK$$ $$lnK = -\frac{\Delta H}{R}\frac{1}{T} + \frac{\Delta S}{R}$$ Hence slope = $-\frac{\Delta H}{R}$ and intercept = $\frac{\Delta S}{R}$ R defined as $8.3144598 \frac{J}{mol K}$ $$ \Delta H = - R * slope; \Delta S = R * intercept$$
 
 ## Step II
 
 ## Step III
-
