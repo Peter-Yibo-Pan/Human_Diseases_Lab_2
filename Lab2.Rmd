@@ -78,3 +78,20 @@ $$ \Delta G = \Delta H- T \Delta S = -RTlnK$$ $$lnK = -\frac{\Delta H}{R}\frac{1
 ## Step II
 
 ## Step III
+```{r step_iii}
+# import data
+step_iii_df <- tribble(
+  ~'x',  ~'y',
+  0.15, 1808, 
+  0.3, 2046, 
+  0.5, 2052, 
+  0.7, 2153, 
+  ) %>%
+  data.frame() 
+# visualization
+step_iii_df %>%
+  ggplot(aes(x = x, y = y)) + 
+  geom_point()
+
+
+```
