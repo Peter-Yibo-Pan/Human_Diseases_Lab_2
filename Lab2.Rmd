@@ -38,12 +38,7 @@ step_i_df <- tribble(
   # data manipulation
   mutate(x_inv = 1/(x + 273))
   
-  
 
-  # visualization
-step_i_df %>% 
-  ggplot(aes(x = x_inv, y = y)) + 
-  geom_point()
 # Q2
   # fit a straight line
   # define linear fit
