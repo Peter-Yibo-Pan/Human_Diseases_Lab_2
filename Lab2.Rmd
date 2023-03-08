@@ -1,11 +1,11 @@
 ---
-title: 'Molecular Mechanisms for Human Diseases: Lab 1'
+title: 'Molecular Mechanisms for Human Diseases: Lab 2'
 subtitle: "Curing Hepatitis"
 author: "Peter Yibo Pan"
 date: (`r Sys.Date()`)
 output:
-  word_document:
-    reference_docx: reference-word.docx
+  html_document:
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -22,7 +22,6 @@ showtext_auto()
 ## Step I
 
 ```{r  step_I}
-
 # Q1
   # import data 
 step_i_df <- tribble(
@@ -51,28 +50,36 @@ step_i_coef <- step_i_fit %>%
 tibble(intercept = step_i_coef[1], 
        slope = step_i_coef[2]) %>%
   kable()
+
+step_i_cap <- "step 1 caption here"
   # visualize
 step_i_df %>% 
   ggplot(aes(x = x_inv, y = y)) + 
   geom_point() + 
   geom_abline(intercept = step_i_coef[1], 
-       slope = step_i_coef[2])
+       slope = step_i_coef[2]) + labs(
+    title = "Figure 1: Growth of  ", 
+    subtitle = "In response to high and low inducer concentration",
+    caption = step_i_cap,
+    x = "1/Temperature (Kelvin)", 
+    y = "ln(K)") + 
+  theme(axis.title = element_text(family = "tinos"),
+    title = element_text(family = "tinos"), 
+    plot.caption = element_text(hjust = 0))
   
 # Q3 
   # calculations
 R <- 8.3144598
 delta_h <- -R * step_i_coef[2]
 delta_s <- R * step_i_coef[1]
-# Q4
-  # Demonstrative visualizations
-
 ```
 
-$$ \Delta G = \Delta H- T \Delta S = -RTlnK$$ $$lnK = -\frac{\Delta H}{R}\frac{1}{T} + \frac{\Delta S}{R}$$ Hence slope = $-\frac{\Delta H}{R}$ and intercept = $\frac{\Delta S}{R}$ R defined as $8.3144598 \frac{J}{mol K}$ $$ \Delta H = - R * slope; \Delta S = R * intercept$$
+  $$ \Delta G = \Delta H- T \Delta S = -RTlnK$$ 
+  $$lnK = -\frac{\Delta H}{R}\frac{1}{T} + \frac{\Delta S}{R}$$ 
+Hence slope = $-\frac{\Delta H}{R}$ and intercept = $\frac{\Delta S}{R}$ R defined as $8.3144598 \frac{J}{mol K}$ 
+  $$ \Delta H = - R * slope; \Delta S = R * intercept$$
+# Step III
 
-## Step II
-
-## Step III
 ```{r step_iii}
 # import data
 step_iii_df <- tribble(
@@ -80,13 +87,44 @@ step_iii_df <- tribble(
   0.15, 1808, 
   0.3, 2046, 
   0.5, 2052, 
-  0.7, 2153, 
-  ) %>%
-  data.frame() 
-# visualization
+  0.7, 2153, ) %>%
+  data.frame() %>% 
+  mutate(c_func = x^(-1/2))
+
+step_iii_cap <- "step 3 caption here"
+# visualization 1: concentration
 step_iii_df %>%
   ggplot(aes(x = x, y = y)) + 
-  geom_point()
+  geom_point() + labs(
+    title = "Figure 4: ", 
+    subtitle = "",
+    caption = step_iii_cap,
+    x = "salt concentration (M)", 
+    y = "ln(K)")+ 
+  theme(axis.title = element_text(family = "tinos"),
+    title = element_text(family = "tinos"), 
+    plot.caption = element_text(hjust = 0))
 
+ # fit a straight line
+  # define linear fit
+step_iii_fit <- lm(step_iii_df$y ~ step_iii_df$c_func)
+  # record coefficients
+step_iii_coef <- step_iii_fit %>%
+  coef()
+
+# visualization 3: inverse sqrt of concentration
+step_iii_df %>%
+  ggplot(aes(x = c_func, y = y)) + 
+  geom_point() + labs(
+    title = "Figure 4: ", 
+    subtitle = "",
+    caption = step_iii_cap,
+    x = "c^-1/2", 
+    y = "ln(K)")+ 
+  geom_abline(intercept = step_iii_coef[1], 
+       slope = step_iii_coef[2]) + 
+  theme(axis.title = element_text(family = "tinos"),
+    title = element_text(family = "tinos"), 
+    plot.caption = element_text(hjust = 0)) 
 
 ```
